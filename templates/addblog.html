@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block pagecontent %}
+
+<h1>I'm Responsible for Blog Upload {{pk}}</h1>
+
+<style>
+.form-signin {
+  width: 100%;
+  max-width: 530px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input {
+  margin-bottom: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.errorlabel{
+  color:red;
+}
+</style>
+<div class="container">
+<main class="form-signin">
+  <form method="POST" action="addblog" enctype="multipart/form-data">
+{% csrf_token %}
+    <h1 class="h1 mb-5 fw-bolder">Add A New Blog ({{user.username}})</h1>
+    {% for msg in messages %}
+        <h6 class="errorlabel">{{msg}}</h6>
+    {% endfor %}
+    
+    <div class="form-floating">
+      <input type="text" class="form-control" name="title" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Title*</label>
+    </div>
+     <div class="form-floating">
+    <textarea id="w3review" name="desc" rows="5" cols="100" class="form-control"></textarea>
+      <label for="floatingInput">Write Blog Content*</label>
+    </div>
+  
+    <div class="form-floating">
+        <select name="Category" id="cars" class="form-select">
+        {%for cat in allcat%}
+            <option value="volvo">{{cat.catname}}</option>
+        {% endfor %}
+        </select>    
+    <label for="floatingInput">Select a Category*</label>
+    </div>
+  
+       <div class="form-floating">
+      <input type="file" class="form-control" name="blogimage" id="floatingInput" placeholder="Upload Image" required>
+      <label for="floatingInput">Upload Blog Photo(optional)</label>
+    </div>
+
+
+    <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Publish now</button>
+    
+  </form>
+</main>
+
+</div>
+{% endblock pagecontent %}

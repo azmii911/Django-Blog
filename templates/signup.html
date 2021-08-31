@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block pagecontent %}
+{% if user.is_authenticated %}
+   <h1>You're not allowed to visit this page, you're already Login</h1>
+  {% else%}
+
+<style>
+.form-signin {
+  width: 100%;
+  max-width: 530px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input {
+  margin-bottom: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.errorlabel{
+  color:red;
+}
+</style>
+<div class="container">
+<main class="form-signin">
+  <form method="POST" action="signup">
+{% csrf_token %}
+    <h1 class="h1 mb-5 fw-bolder">Create Your account</h1>
+    {% for msg in messages %}
+        <h6 class="errorlabel">{{msg}}</h6>
+    {% endfor %}
+    <div class="form-floating">
+      <input type="text" class="form-control" name="Username" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">User name*</label>
+    </div>
+    <div class="form-floating">
+      <input type="email" class="form-control" name="Useremail" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address*</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="Userpass" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password*</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="Userrepass"id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Confirm Password*</label>
+    </div>
+       <div class="form-floating">
+      <input type="file" class="form-control" name="Userimage" id="floatingInput" placeholder="Upload File">
+      <label for="floatingInput">Upload Your Photo(optional)</label>
+    </div>
+
+
+    <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Create account</button>
+    
+    <h6>Already have an account?</h6>
+    <a href="login" class="w-100 btn btn-lg btn-outline-primary">Login</a>
+    
+  </form>
+</main>
+
+</div>
+{% endif%}
+
+{% endblock pagecontent %}

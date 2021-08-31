@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block pagecontent %}
+
+{% if user.is_authenticated%}
+   <h1>You're not allowed to visit this page, you're already login</h1>
+{%else%}
+
+<style>
+.form-signin {
+  width: 100%;
+  max-width: 530px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style> 
+<div class="container">
+<main class="form-signin">
+  <form method="POST" action="login">
+  {% csrf_token %}
+    <h1 class="h1 mb-5 fw-bolder">Create Your account</h1>
+    {% for msg in messages %}
+        <h6 class="errorlabel">{{msg}}</h6>
+    {% endfor %}
+    <h1 class="h1 mb-5 fw-bolder">Please Log in</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" name="UserName" id="floatingInput" placeholder="user name">
+      <label for="floatingInput">User Name</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="Userpass" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Log in</button>
+    <h6>Don't have an account?</h6>
+    <a href="signup" class="w-100 btn btn-lg btn-outline-primary">Create account</a>
+
+  </form>
+</main>
+
+</div>
+
+
+{%endif%}
+{% endblock pagecontent %}

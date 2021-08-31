@@ -1,0 +1,56 @@
+{% extends 'base.html' %}.
+{% load static %}
+{% block pagecontent %}
+    <div class="container-fluid">
+        <div class="container">
+        <div style="background:#f3f3f3   !important; border-radius:1% ;padding:5%;margin:2%">
+
+        <div class="row align-middle" style="background:#f3f3f3">
+            <div class="col-md-3 d-flex justify-content-center" style="background:#f3f3f3">
+                <div class="p-5" style="display:inline-block">
+                    <div class="image">
+                        <img class="rounded float-start" src="{% static 'images/raheel.jpg' %}" alt=""
+                        height="200px" width="200px" 
+                        style="border-radius:50% !important"/>
+                    </div>
+                    <div class="name">
+                        <h2 class="align-middle text-center">{{user.username}}</h2>
+                        <h5 class="align-middle text-center">Total Blogs <span class="badge rounded-pill bg-light text-primary">{{totalcount}}</span></h5>
+                        
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="col-md-9 p-2" style="background:#fdfdff">
+            {% for msg in messages %}
+                <h6 class="errorlabel">{{msg}}</h6>
+            {% endfor %}
+            <div style="display:flex;justify-content: flex-end;">
+                <div class="p-2">
+                <a href="{{ user.id }}/addblog" class="btn btn-primary">Publish a new blog</a>
+                </div>
+            </div>
+             <div class="p-5" style="display:inline-block">
+                    <div class="name">
+                        <h2 class="align-middle">My Feed</h2>
+                    </div>
+                        {%for specificblogs in sblogs%}
+                            <div class="card mb-4">
+                                <a href="#"><img class="img-thumbnail" src='{{specificblogs.photo}}' alt="..." height="250px" width="150px" /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">{{specificblogs.date}}</div>
+                                    <h2 class="card-title h4">{{specificblogs.title}}</h2>
+                                    <p class="card-text">{{specificblogs.desc|truncatewords:21}}</p>
+                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                </div>
+                            </div>
+                        {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</div>
+{% endblock pagecontent %}
